@@ -35,8 +35,8 @@ namespace LaYumba.Functional
          var grouped = source.GroupBy(predicate);
          return
          (
-            Passed: grouped.Where(g => g.Key).FirstOrDefault(Enumerable.Empty<T>()),
-            Failed: grouped.Where(g => !g.Key).FirstOrDefault(Enumerable.Empty<T>())
+            Passed: grouped.Where(g => g.Key).FirstOrDefault(),
+            Failed: grouped.Where(g => !g.Key).FirstOrDefault()
          );
       }
 

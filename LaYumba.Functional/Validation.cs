@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Unit = System.ValueTuple;
 
+#nullable enable annotations
+
 namespace LaYumba.Functional
 {
    using static F;
@@ -21,7 +23,7 @@ namespace LaYumba.Functional
 
    public struct Validation<T>
    {
-      internal IEnumerable<Error> Errors { get; }
+      public IEnumerable<Error> Errors { get; }
       internal T? Value { get; }
 
       public bool IsValid { get; }

@@ -51,7 +51,7 @@ namespace LaYumba.Functional.Tests
 
          uriTry.Run().Match(
              Success: uri => Assert.NotNull(uri),
-             Exception: ex => Assert.True(false, "should have succeeded")
+             Exception: ex => Assert.Fail("should have succeeded")
          );
          Assert.True(tried, "matching should run the Try");
       }

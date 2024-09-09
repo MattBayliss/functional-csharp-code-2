@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Xunit;
 
+#nullable disable
+
 namespace LaYumba.Functional.Tests
 {
    public class TaskTests
@@ -10,19 +12,19 @@ namespace LaYumba.Functional.Tests
       async Task<T> Succeed<T>(T t) => await Task.FromResult(t);
 
       [Fact]
-      public async void WhenTSucceeds_ThenMapSucceeds()
+      public async Task WhenTSucceeds_ThenMapSucceeds()
       {
          var actual = await Succeed("value").Map(String.ToUpper);
          Assert.Equal("VALUE", actual);
       }
 
       [Fact]
-      public async void TaskFailsWithGivenException() =>
+      public async Task TaskFailsWithGivenException() =>
          await Assert.ThrowsAsync<Exception>(() => Fail());
 
       // note that the type of the Exception should be preserved
       [Fact]
-      public async void WhenTFails_ThenMapFails() =>
+      public async Task WhenTFails_ThenMapFails() =>
          await Assert.ThrowsAsync<Exception>(() => Fail().Map(String.ToUpper));
 
       [Fact]
@@ -34,21 +36,21 @@ namespace LaYumba.Functional.Tests
          Fail().Bind(_ => Fail());
 
       [Fact]
-      public async void BindSuccess()
+      public async Task BindSuccess()
       {
          var result = await Succeed("value").Bind(s => Succeed("next value"));
          Assert.Equal("next value", result);
       }
 
       [Fact]
-      public async void WhenTFails_ThenBindFails()
+      public async Task WhenTFails_ThenBindFails()
       {
          var task = Fail().Bind(s => Succeed("next value"));
          await Assert.ThrowsAsync<Exception>(async () => await task);
       }
 
       [Fact]
-      public async void WhenFFails_ThenBindFails()
+      public async Task WhenFFails_ThenBindFails()
       {
          var task = Succeed("value").Bind(s => Fail());
          await Assert.ThrowsAsync<Exception>(async () => await task);
@@ -79,7 +81,7 @@ namespace LaYumba.Functional.Tests
          (a, b, c, d, e, f, g, h, i) => a + b + c + d + e + f + g + h + i;
 
       [Fact]
-      public async void MapAndApplyArg_ReturnsExpectedContent()
+      public async Task MapAndApplyArg_ReturnsExpectedContent()
       {
          var result = await Succeed(3)
             .Map(add)
@@ -89,7 +91,7 @@ namespace LaYumba.Functional.Tests
       }
 
       [Fact]
-      public async void MapAndApplyArg_to_function_requiring_3_arguments()
+      public async Task MapAndApplyArg_to_function_requiring_3_arguments()
       {
          var result = await Succeed(1)
             .Map(add3Integers)
@@ -100,7 +102,7 @@ namespace LaYumba.Functional.Tests
       }
 
       [Fact]
-      public async void MapAndApplyArg_to_function_requiring_4_arguments()
+      public async Task MapAndApplyArg_to_function_requiring_4_arguments()
       {
          var result = await Succeed(1)
             .Map(add4Integers)
@@ -112,7 +114,7 @@ namespace LaYumba.Functional.Tests
       }
 
       [Fact]
-      public async void MapAndApplyArg_to_function_requiring_5_arguments()
+      public async Task MapAndApplyArg_to_function_requiring_5_arguments()
       {
          var result = await Succeed(1)
             .Map(add5Integers)
@@ -125,7 +127,7 @@ namespace LaYumba.Functional.Tests
       }
 
       [Fact]
-      public async void MapAndApplyArg_to_function_requiring_6_arguments()
+      public async Task MapAndApplyArg_to_function_requiring_6_arguments()
       {
          var result = await Succeed(1)
             .Map(add6Integers)
@@ -139,7 +141,7 @@ namespace LaYumba.Functional.Tests
       }
 
       [Fact]
-      public async void MapAndApplyArg_to_function_requiring_7_arguments()
+      public async Task MapAndApplyArg_to_function_requiring_7_arguments()
       {
          var result = await Succeed(1)
             .Map(add7Integers)
@@ -154,7 +156,7 @@ namespace LaYumba.Functional.Tests
       }
 
       [Fact]
-      public async void MapAndApplyArg_to_function_requiring_8_arguments()
+      public async Task MapAndApplyArg_to_function_requiring_8_arguments()
       {
          var result = await Succeed(1)
             .Map(add8Integers)
@@ -170,7 +172,7 @@ namespace LaYumba.Functional.Tests
       }
 
       [Fact]
-      public async void MapAndApplyArg_to_function_requiring_9_arguments()
+      public async Task MapAndApplyArg_to_function_requiring_9_arguments()
       {
          var result = await Succeed(1)
             .Map(add9Integers)

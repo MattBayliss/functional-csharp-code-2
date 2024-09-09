@@ -4,6 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Unit = System.ValueTuple;
 
+#nullable enable annotations
+
 namespace LaYumba.Functional
 {
    using static F;
@@ -150,7 +152,7 @@ namespace LaYumba.Functional
       public static Unit Match<T>(this Option<T> @this, Action None, Action<T> Some)
           => @this.Match(None.ToFunc(), Some.ToFunc());
 
-      internal static bool IsSome<T>(this Option<T> @this)
+      public static bool IsSome<T>(this Option<T> @this)
          => @this.Match(
             () => false,
             (_) => true);

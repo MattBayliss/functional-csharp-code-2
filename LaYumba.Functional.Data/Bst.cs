@@ -1,5 +1,7 @@
 ﻿using System;
 
+#nullable enable annotations
+
 namespace LaYumba.Functional.Data.Bst
 {
    using System.Collections.Generic;
